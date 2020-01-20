@@ -6,11 +6,11 @@ class WeatherForm extends Component{
   state = {
     region: '',
     regionName: '',
+    country: '',
     weather: '',
-    desc: '',
+    description: '',
     temp_max: '',
     temp_min: '',
-    humidity: '',
     weatherIcon: ''
   }
 
@@ -30,18 +30,20 @@ class WeatherForm extends Component{
 
     let response = await fetchWeather(userRegionInput)
 
-    let regionName = response.name
+    let regionName = response.name;
+    let country = response.sys.country;
     let weather = response.weather[0].main;
-    let desc = response.weather[0].description;
+    let description = response.weather[0].description;
     let temp_max = response.main.temp_max;
     let temp_min = response.main.temp_min;
     let weatherIcon = response.weather[0].icon;
 
     this.setState({
       region: '',
-      desc: desc,
+      description: description,
       weatherIcon: weatherIcon,
       regionName: regionName,
+      country: country,
       weather: weather,
       temp_max: temp_max,
       temp_min: temp_min
@@ -49,10 +51,20 @@ class WeatherForm extends Component{
   }
 
   render(){
-    const { region, regionName, weather, desc, temp_max, temp_min, weatherIcon } = this.state
+    const {
+      region,
+      regionName,
+      country,
+      weather,
+      description,
+      temp_max,
+      temp_min,
+      weatherIcon } = this.state
+
     return(
       <section>
         Enter your city or state
+
         <form onSubmit={(evt) => this.handleSubmit(evt)}>
           <input
             type='text'
@@ -68,8 +80,9 @@ class WeatherForm extends Component{
           ?
         <WeatherResults
           name={regionName}
+          country={country}
           weather={weather}
-          desc={desc}
+          description={description}
           weatherIcon={weatherIcon}
           temp_max={temp_max}
           temp_min={temp_min}/>

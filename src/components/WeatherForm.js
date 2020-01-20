@@ -30,6 +30,7 @@ class WeatherForm extends Component{
     const userRegionInput = this.state.userRegionInput
 
     let response = await fetchWeather(userRegionInput)
+
     if(response){
 
       let regionName = response.name;
@@ -48,8 +49,10 @@ class WeatherForm extends Component{
         country: country,
         weather: weather,
         temp_max: temp_max,
-        temp_min: temp_min
+        temp_min: temp_min,
+        error: ''
       })
+      
     } else {
       this.setState({
         error: 'Region Not Found. Please Check Your Input'
@@ -71,7 +74,7 @@ class WeatherForm extends Component{
 
     return(
       <section>
-        Enter your city or state
+        <p>Enter your city or state</p>
 
         <form onSubmit={(evt) => this.handleSubmit(evt)}>
           <input

@@ -21,16 +21,16 @@ export default function WeatherResults(props){
     <section id='weather-results'>
       { error
         ?
-        <h3>{error}</h3>
+        <p>{error}</p>
         :
         <section>
-          <h3>{name}, {country}</h3>
-          <h3>Weather: {weather}</h3>
+          <p>{name}, {country}</p>
+          <p>Weather: {weather}</p>
 
           <img src={`https://openweathermap.org/img/w/${weatherIcon}.png`} alt='weather-icon'/>
           <p>{description.toUpperCase()}</p>
-          <h3>Max Temperature: {temperatureMax[0]} °F</h3>
-          <h3>Min Temperature: {temperatureMin[0]} °F</h3>
+          <p>Max Temperature: {temperatureMax[0]} °F</p>
+          <p>Min Temperature: {temperatureMin[0]} °F</p>
         </section>
       }
     </section>

@@ -12,10 +12,19 @@ export default function WeatherResults(props){
     weatherIcon,
     error } = props;
 
-  //removing the numbers after the '.'
-  let temperatureMax = temp_max.toString().split('.')
-  let temperatureMin = temp_min.toString().split('.')
 
+  function kelvinToFahrenheit(temperatureInKelvin){
+    let fahrenheitConversion = (temperatureInKelvin - 273.15) * 9/5 + 32;
+    //removing the numbers after the '.'
+    let fahrenheitTemp = fahrenheitConversion.toString().split('.')[0];
+
+    return fahrenheitTemp + ' °F';
+  }
+
+  let temperatureMax = kelvinToFahrenheit(temp_max)
+  let temperatureMin = kelvinToFahrenheit(temp_min)
+
+  // If the user misppells the name of city or state, the app will not break, instead, it will display an error message
   return(
 
     <section id='weather-results'>
@@ -29,8 +38,8 @@ export default function WeatherResults(props){
 
           <img src={`https://openweathermap.org/img/w/${weatherIcon}.png`} alt='weather-icon'/>
           <p>{description.toUpperCase()}</p>
-          <p>Max Temperature: {temperatureMax[0]} °F</p>
-          <p>Min Temperature: {temperatureMin[0]} °F</p>
+          <p>Max Temperature: { temperatureMax } </p>
+          <p>Min Temperature: { temperatureMin } </p>
         </section>
       }
     </section>

@@ -30,6 +30,8 @@ class WeatherForm extends Component{
     const userRegionInput = this.state.userRegionInput
 
     let response = await fetchWeather(userRegionInput)
+    // If response is true, set information to state.
+    // else, display error message to user
 
     if(response){
 
@@ -52,7 +54,7 @@ class WeatherForm extends Component{
         temp_min: temp_min,
         error: ''
       })
-      
+
     } else {
       this.setState({
         error: 'Region Not Found. Please Check Your Input'
@@ -72,8 +74,10 @@ class WeatherForm extends Component{
       weatherIcon,
       error } = this.state
 
+      // Weather results will be displayed if api call is successfull or if there's an error to be displayed
     return(
       <section>
+
         <p>Enter your city or state</p>
 
         <form onSubmit={(evt) => this.handleSubmit(evt)}>
@@ -85,10 +89,11 @@ class WeatherForm extends Component{
               this.handleChange(event)}
             placeholder='Enter Here'
             autoComplete='off'/>
+            <input type='submit' value='Search'/>
         </form>
         {
         weather || error
-          ?
+        ?
         <WeatherResults
           name={regionName}
           country={country}

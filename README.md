@@ -1,26 +1,22 @@
 #Planning
 
-1. My first step is to make a fetch request to the 'https://openweathermap.org/api' and make sure the API_KEY returns a 200 status code
+1. My first step is to make a fetch request to the 'https://openweathermap.org/api' and make sure it returns a 200 status code
 
 2. Make a form for the User to search the weather in their city. The api call will be made when the user submits the form
 
 3. Create a component to handle the display of the info gathered from the api call
 
+4. Make sure that every tag is semantic, instead of using `<div>`
 
-# JavaScript Homework
 
-To complete this homework, you will work on a simple weather app in JavaScript. Our expectation is that you timebox the effort to 1 to 4 hours. You may work on any of the stories in the list below, but you are not expected to complete them all. Code quality is more important than quantity, we are more interested in how you approach the problems than how many you solve. Some of the user stories are ambiguous, there are many acceptable solutions, use your judgement.
+- [x] As a user, I would like to search for the current weather in my area
 
-You may be asked to explain your work and pair with a Contently engineer to further enhance the app.
+##Possible Problems with the app and how I would fix them
 
-To submit your homework, please update this README with information about which stories you completed, and submit the features as a pull request. The engineering team will provide feedback via a code review.
+* User is not given the choice of which country to search
+  To fix the problem I could display a dropdown menu with all the countries, so that the user can choose from them.
+  Or After the API response is displayed on the page, the question "Not the {name_of_city} you were looking for? Search the country here" with a new input box.
 
-## User stories to implement
-
-- [ ] As a user, I would like to search for the current weather in my area
-- [ ] As a user, I would like to see the 5-day forecast
-- [ ] As a user, I would like to share the URL of the weather in my area and see the results
-- [ ] As a user, I would like to toggle between celsius and fahrenheit
 
 ## Getting started
 

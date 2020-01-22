@@ -30,3 +30,19 @@ section > #weather-results {
   height: 50vh;
   color: black;
 }
+
+.url_to_share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.url_to_share > p {
+  font-size: 10px;
+}
+
+.url_to_share > img {
+  width: 5%;
+  margin: .5rem;
+}

@@ -7,12 +7,10 @@ class WeatherForm extends Component{
     userRegionInput: '',
     regionName: '',
     country: '',
-    weather: '',
-    description: '',
-    temp_max: '',
-    temp_min: '',
     weatherIcon: '',
-    error: ''
+    error: '',
+    daysList: [],
+    url_to_share: ''
   }
 
 
@@ -28,30 +26,24 @@ class WeatherForm extends Component{
     evt.preventDefault()
 
     const userRegionInput = this.state.userRegionInput
-
     let response = await fetchWeather(userRegionInput)
+
     // If response is true, set information to state.
     // else, display error message to user
 
     if(response){
-
-      let regionName = response.name;
-      let country = response.sys.country;
-      let weather = response.weather[0].main;
-      let description = response.weather[0].description;
-      let temp_max = response.main.temp_max;
-      let temp_min = response.main.temp_min;
-      let weatherIcon = response.weather[0].icon;
+      let data = response.response
+      let URL = response.url
+      let regionName = data.city.name;
+      let country = data.city.country;
+      let daysList = data.list
 
       this.setState({
         userRegionInput: '',
-        description: description,
-        weatherIcon: weatherIcon,
         regionName: regionName,
         country: country,
-        weather: weather,
-        temp_max: temp_max,
-        temp_min: temp_min,
+        daysList: daysList,
+        url_to_share: URL,
         error: ''
       })
 
@@ -60,6 +52,7 @@ class WeatherForm extends Component{
         error: 'Region Not Found. Please Check Your Input'
       })
     }
+    console.log(this.state);
   }
 
   render(){
@@ -67,11 +60,8 @@ class WeatherForm extends Component{
       userRegionInput,
       regionName,
       country,
-      weather,
-      description,
-      temp_max,
-      temp_min,
-      weatherIcon,
+      daysList,
+      url_to_share,
       error } = this.state
 
       // Weather results will be displayed if api call is successfull or if there's an error to be displayed
@@ -92,17 +82,14 @@ class WeatherForm extends Component{
             <input type='submit' value='Search'/>
         </form>
         {
-        weather || error
+        regionName || error
         ?
         <WeatherResults
           name={regionName}
           country={country}
-          weather={weather}
-          description={description}
-          weatherIcon={weatherIcon}
-          temp_max={temp_max}
-          temp_min={temp_min}
-          error={error}/>
+          error={error}
+          url_to_share={url_to_share}
+          daysList={daysList}/>
         :
         null}
       </section>

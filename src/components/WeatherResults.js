@@ -1,17 +1,9 @@
 import React, {useState} from 'react';
+import Day from './Day';
 
 export default function WeatherResults(props){
   const [temperatureChosen, setTemperatureUnit] = useState(false);
-
-  const {
-    name,
-    country,
-    weather,
-    description,
-    temp_max,
-    temp_min,
-    weatherIcon,
-    error } = props;
+  const [wasTextCopied, copyTextToClipboard] = useState('Click to copy');
 
 
     function temperatureUnit(temperature){
@@ -19,11 +11,10 @@ export default function WeatherResults(props){
         let celsius = kelvinToCelsius(temperature)
         return celsius;
       } else {
-        let fahrenheit = kelvinToFahrenheit(temperature)
-        return fahrenheit;
+          let fahrenheit = kelvinToFahrenheit(temperature)
+          return fahrenheit;
       }
     }
-
 
   function kelvinToFahrenheit(temperatureInKelvin){
     // function converts kelvin to fahrenheit
@@ -34,17 +25,42 @@ export default function WeatherResults(props){
     return fahrenheitTemp + ' °F';
   }
 
-  let temperatureMax = temperatureUnit(temp_max)
-  let temperatureMin = temperatureUnit(temp_min)
 
   function kelvinToCelsius(temperatureInKelvin){
     // function converts kelvin to celsius
     let celsiusConversion = temperatureInKelvin - 273.15;
     let celsiusTemp = celsiusConversion.toString().split('.')[0];
     return celsiusTemp + ' °C';
+  }
+
+
+   function shareUrl(){
+    let copyText = document.getElementById("sharing-url");
+    copyText.select()
+    document.execCommand("copy");
+
+    copyTextToClipboard('Text copied to clipboard')
 
   }
 
+  const {
+    name,
+    country,
+    daysList,
+    url_to_share,
+    error } = props;
+
+
+    const days = daysList.map(day => (
+      <Day
+      temp_min={temperatureUnit(day.main.temp_min)}
+      temp_max={temperatureUnit(day.main.temp_max)}
+      feels_like={temperatureUnit(day.main.feels_like)}
+      weatherInfo={day.weather[0]}
+
+      />
+      )
+    )
   // If the user misppells the name of city or state, the app will not break, instead, it will display an error message
   return(
 
@@ -55,13 +71,12 @@ export default function WeatherResults(props){
         :
         <section>
           <p>{name}, {country}</p>
-          <p>Weather: {weather}</p>
-
-          <img src={`https://openweathermap.org/img/w/${weatherIcon}.png`} alt='weather-icon'/>
-          <p>{description.toUpperCase()}</p>
+          <div className='url_to_share'>
+            <input id='sharing-url' type='text' value={url_to_share} onClick={() => shareUrl()}/>
+            <p>{wasTextCopied}</p>
+          </div>
           <button onClick={() => setTemperatureUnit(!temperatureChosen)}> Change Temperature Unit </button>
-          <p>Max Temperature: { temperatureMax } </p>
-          <p>Min Temperature: { temperatureMin } </p>
+          {days}
         </section>
       }
     </section>

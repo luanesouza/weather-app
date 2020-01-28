@@ -27,7 +27,6 @@ body {
 section > #weather-results {
   margin: 2rem;
   background-color: rgba(255, 255, 255, .5);
-  height: 50vh;
   color: black;
 }
 

@@ -30,7 +30,6 @@ section > #weather-results {
   color: black;
 }
 
-<<<<<<< HEAD
 .url_to_share {
   display: flex;
   flex-direction: column;
@@ -45,7 +44,8 @@ section > #weather-results {
 .url_to_share > img {
   width: 5%;
   margin: .5rem;
-=======
+}
+
 .searchCards {
   display: flex;
   flex-wrap: wrap;
@@ -54,5 +54,4 @@ section > #weather-results {
 
 #card {
   padding: 1rem;
->>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
 }

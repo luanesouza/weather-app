@@ -11,14 +11,11 @@ class WeatherForm extends Component{
     regionName: '',
     country: '',
     weatherIcon: '',
-<<<<<<< HEAD
     error: '',
     daysList: [],
-    url_to_share: ''
-=======
+    url_to_share: '',
     recentSearches: [],
     error: ''
->>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
   }
 
 
@@ -85,17 +82,14 @@ class WeatherForm extends Component{
       userRegionInput,
       regionName,
       country,
-<<<<<<< HEAD
       daysList,
       url_to_share,
-=======
       weather,
       description,
       temp_max,
       temp_min,
       weatherIcon,
       recentSearches,
->>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
       error } = this.state
 
       // Weather results will be displayed if api call is successfull or if there's an error to be displayed
@@ -126,7 +120,6 @@ class WeatherForm extends Component{
         }
 
         {
-<<<<<<< HEAD
         regionName || error
         ?
         <WeatherResults
@@ -137,7 +130,6 @@ class WeatherForm extends Component{
           daysList={daysList}/>
         :
         null}
-=======
           weather
           ?
           <>
@@ -154,7 +146,6 @@ class WeatherForm extends Component{
           :
           <Error error={error}/>
         }
->>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
       </section>
     )
   }

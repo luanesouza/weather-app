@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
-import { fetchWeather } from '../utils'
-import WeatherResults from './WeatherResults'
+import { fetchWeather } from '../utils';
+import WeatherResults from './WeatherResults';
+import RecentSearches from './RecentSearches';
+import Error from './Error';
 
 class WeatherForm extends Component{
+
   state = {
     userRegionInput: '',
     regionName: '',
     country: '',
     weatherIcon: '',
+<<<<<<< HEAD
     error: '',
     daysList: [],
     url_to_share: ''
+=======
+    recentSearches: [],
+    error: ''
+>>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
   }
 
 
@@ -38,6 +46,9 @@ class WeatherForm extends Component{
       let country = data.city.country;
       let daysList = data.list
 
+      // Created function that's responsible for setting state for recentSearches
+      this.checkingRecentSearches(regionName, weatherIcon)
+
       this.setState({
         userRegionInput: '',
         regionName: regionName,
@@ -49,8 +60,22 @@ class WeatherForm extends Component{
 
     } else {
       this.setState({
-        error: 'Region Not Found. Please Check Your Input'
+        error: 'Region Not Found. Please Check Your Input',
+        weather: ''
       })
+    }
+  }
+
+  checkingRecentSearches(regionName, weatherIcon){
+    const {recentSearches} = this.state;
+    let equalToFive = recentSearches.length === 5;
+
+    if(!equalToFive) {
+      this.setState({
+        recentSearches: [...recentSearches, {regionName: regionName, icon: weatherIcon}],
+      })
+
+      localStorage.setItem('recentSearches', JSON.stringify(this.state.recentSearches))
     }
     console.log(this.state);
   }
@@ -60,14 +85,22 @@ class WeatherForm extends Component{
       userRegionInput,
       regionName,
       country,
+<<<<<<< HEAD
       daysList,
       url_to_share,
+=======
+      weather,
+      description,
+      temp_max,
+      temp_min,
+      weatherIcon,
+      recentSearches,
+>>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
       error } = this.state
 
       // Weather results will be displayed if api call is successfull or if there's an error to be displayed
     return(
       <section>
-
         <p>Enter your city or state</p>
 
         <form onSubmit={(evt) => this.handleSubmit(evt)}>
@@ -81,7 +114,19 @@ class WeatherForm extends Component{
             autoComplete='off'/>
             <input type='submit' value='Search'/>
         </form>
+
         {
+          JSON.parse(localStorage.getItem('recentSearches'))
+          ?
+          <RecentSearches
+            recentSearches={recentSearches}
+            />
+          :
+          null
+        }
+
+        {
+<<<<<<< HEAD
         regionName || error
         ?
         <WeatherResults
@@ -92,6 +137,24 @@ class WeatherForm extends Component{
           daysList={daysList}/>
         :
         null}
+=======
+          weather
+          ?
+          <>
+            <WeatherResults
+              name={regionName}
+              country={country}
+              weather={weather}
+              description={description}
+              weatherIcon={weatherIcon}
+              temp_max={temp_max}
+              temp_min={temp_min}
+                />
+              </>
+          :
+          <Error error={error}/>
+        }
+>>>>>>> a80a44e30427ba7b76d541c739cf2c10b962143b
       </section>
     )
   }

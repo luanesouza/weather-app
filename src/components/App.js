@@ -1,5 +1,4 @@
 import React from "react";
-import { ReactComponent as Logo } from "../images/sun.svg";
 import WeatherForm from './WeatherForm'
 import "../App.css";
 

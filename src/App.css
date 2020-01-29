@@ -30,3 +30,13 @@ section > #weather-results {
   height: 50vh;
   color: black;
 }
+
+.searchCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#card {
+  padding: 1rem;
+}
